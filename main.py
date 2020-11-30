@@ -117,3 +117,55 @@ vk = VirtualKeyboard()
 gs = 1
 global attempts
 attempts = 0
+
+#game loop------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FPS = 60
+clock = pygame.time.Clock()
+
+while gs == 1:
+
+    if len(images)-attempts == 0:
+        gs = 2
+    hangman_status = attempts
+    clock.tick(FPS)
+    DrawEverything()
+    pygame.display.update()
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            gs = 2
+
+
+
+        if event.type == pygame.MOUSEBUTTONDOWN and KeyboardInput() != False:
+            if KeyboardInput() in vk.keys:
+                attempts += 1
+                if KeyboardInput() in w.letters:
+                    attempts -= 1
+
+            for index,letter in enumerate(w.letters):
+                if letter == KeyboardInput().lower():
+                    print ("letter in word")
+                    w.letters[index] = w.letters[index].upper()
+                    print(w.letters)     
+            print(f"{len(images)-attempts} attempts left.")
+
+
+            
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                gs = 2
+            if event.unicode.upper() in vk.keys:
+                attempts += 1
+                if event.unicode.lower() in w.letters:
+                    attempts -= 1
+            for index,letter in enumerate(w.letters):
+                if event.unicode == letter:
+                    print ("letter in word")
+                    w.letters[index] = w.letters[index].upper()
+                    print(w.letters)
+                    print(event.unicode)
+            print(attempts)
+
+# closing pygame when thrown out of the loop------------------------------------------------------------------------------------------------------
+pygame.quit()
