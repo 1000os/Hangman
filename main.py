@@ -29,7 +29,7 @@ class word():
                 line_end = (line_start[0]+20,250)
                 pygame.draw.line(screen,(255,255,255), line_start, line_end, 1)
                 
-                class VirtualKeyboard():
+class VirtualKeyboard():
     def __init__(self):
         self.keys = ["Q","W","E","R","T","Y","U","I","O","P",
                         "A","S","D","F","G","H","J","K","L",
